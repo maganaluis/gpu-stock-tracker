@@ -34,7 +34,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: your-docker-username/gpu-stock-tracker:amd64
+          tags: deepvolition/gpu-stock-tracker:amd64
 
       # -------- BUILD & PUSH ARM64 --------
       - name: Build and push (arm64)
@@ -44,4 +44,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/arm64
           push: true
-          tags: your-docker-username/gpu-stock-tracker:arm64
+          tags: deepvolition/gpu-stock-tracker:arm64
