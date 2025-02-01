@@ -17,6 +17,7 @@ This tracker:
     - [Local Docker Build (Single Architecture)](#local-docker-build-single-architecture)  
     - [GitHub Actions (Multi-Arch Build)](#github-actions-multi-arch-build)  
     - [Running the Docker Image](#running-the-docker-image)  
+5. [Setting Up a Discord Webhook](#setting-up-a-discord-webhook)
 
 ---
 
@@ -180,3 +181,15 @@ docker run --rm -it \
 1. `-v "$PWD/config.yaml:/config.yaml"` mounts your local `config.yaml` into the container.
 2. If the container is run on an ARM machine (like a Raspberry Pi 4), Docker will automatically pull and run the arm64 image if your image is multi-arch. On x86_64, it uses the amd64 image.
 
+## Setting Up a Discord Webhook
+
+To receive notifications via Discord, you need to set up a webhook:
+
+1. Open Discord and navigate to your server settings.
+2. Click on Integrations and then Webhooks.
+3. Click New Webhook and give it a name.
+4. Select the channel where you want notifications to appear.
+5. Copy the generated webhook URL.
+6. Paste this URL into the config.yaml file under discord_webhook_url.
+
+Once configured, the GPU Stock Tracker will send messages to the designated Discord channel when stock status changes.
