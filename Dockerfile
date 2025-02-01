@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.4
 
 # ----------- Stage 1: Builder ------------
-FROM --platform=$BUILDPLATFORM rust:1.68-bullseye AS builder
+FROM --platform=$BUILDPLATFORM rust:1.84-bullseye AS builder
 
 # We need a few environment variables for cross-compilation:
 #   BUILDPLATFORM / TARGETPLATFORM / TARGETARCH are automatically set by Buildx.
