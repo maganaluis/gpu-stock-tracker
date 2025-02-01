@@ -1,0 +1,17 @@
+[package]
+name = "gpu-stock-tracker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1.28", features = ["rt-multi-thread", "macros"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+scraper = "0.13"
+
+# If you use Twilio, you can either:
+# twilio-rs = "0.6"
+# or just make direct HTTP calls to Twilio in your code.
+

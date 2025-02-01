@@ -1,0 +1,17 @@
+notification:
+  method: "discord"         # or "sms"
+  discord_webhook_url: ""
+  twilio_account_sid: "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  twilio_auth_token: "your_auth_token"
+  twilio_from_number: "+1234567890"
+  twilio_to_number: "+1987654321"
+
+monitor_interval_sec: 15  # e.g., 60 seconds
+
+gpus:
+  - name: "ASUS ROG Astral GeForce RTX 5090 32GB"
+    url: "https://www.newegg.com/asus-rog-astral-rog-astral-rtx5090-o32g-gaming-nvidia-geforce-rtx-5090-32gb-gddr7/p/N82E16814126751?Item=N82E16814126751&Tpk=14-126-751"
+    in_stock_selector: ".nav-col.has-qty-box"
+  - name: "MSI Ventus GeForce RTX 4060 8GB"
+    url: "https://www.newegg.com/msi-rtx-4060-ventus-2x-black-8g-oc-nvidia-geforce-rtx-4060-8gb-gddr6/p/N82E16814137804?Item=N82E16814137804&SoldByNewegg=1"
+    in_stock_selector: ".nav-col.has-qty-box"
