@@ -13,6 +13,7 @@ This tracker:
 2. [Configuration](#configuration)  
 3. [Running Locally (Cargo)](#running-locally-cargo)  
 4. [Docker Usage](#docker-usage)  
+    - [Using Prebuilt Docker Images](#using-prebuilt-docker-images)  
     - [Local Docker Build (Single Architecture)](#local-docker-build-single-architecture)  
     - [GitHub Actions (Multi-Arch Build)](#github-actions-multi-arch-build)  
     - [Running the Docker Image](#running-the-docker-image)  
@@ -70,6 +71,25 @@ The tracker will:
 3. If in stock, it attempts a Discord or Twilio notification.
 
 ## Docker Usage
+
+### Using Prebuilt Docker Images
+
+Prebuilt images are available on Docker Hub under the username `deepvolition`. To use a prebuilt image, simply pull and run it:
+
+```bash
+docker pull deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture
+```
+
+Then run the container:
+
+```bash
+docker run --rm -it \
+  -v "$PWD/config.yaml:/config.yaml" \
+  deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture
+```
+
+This will ensure you are always using the latest built image without needing to compile it manually.
+
 ### Local Docker Build (Single Architecture)
 
 You can build a Docker image locally (just for your machine’s architecture):
@@ -131,10 +151,9 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          # We'll build for both arm64 & amd64 in one step, pushing a single multi-arch tag:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: your-docker-username/gpu-stock-tracker:latest
+          tags: deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture
 ```
 
 This workflow:
@@ -142,23 +161,22 @@ This workflow:
 1. Runs on GitHub’s ubuntu-latest runner (x86_64).
 2. Sets up QEMU to emulate arm64.
 3. Builds a multi-architecture Docker image supporting both amd64 and arm64.
-4. Pushes the final manifest to your-docker-username/gpu-stock-tracker:latest.
+4. Pushes the final manifest to `deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture`.
 
 (If you prefer separate tags for each arch, just split it into two build steps with platforms: linux/amd64 and platforms: linux/arm64, respectively.)
 
 ## Running the Docker Image
 
-If you pushed to Docker Hub with your-docker-username/gpu-stock-tracker:latest, you can run:
+If you pulled the image from Docker Hub under `deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture`, you can run:
 
-docker pull your-docker-username/gpu-stock-tracker:latest
-
-```yaml
-docker pull your-docker-username/gpu-stock-tracker:latest
+```bash
+docker pull deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture
 
 docker run --rm -it \
   -v "$PWD/config.yaml:/config.yaml" \
-  your-docker-username/gpu-stock-tracker:latest
-
+  deepvolition/gpu-stock-tracker:{arch}  # Replace {arch} with amd64 or arm64 depending on your system architecture
 ```
+
 1. `-v "$PWD/config.yaml:/config.yaml"` mounts your local `config.yaml` into the container.
 2. If the container is run on an ARM machine (like a Raspberry Pi 4), Docker will automatically pull and run the arm64 image if your image is multi-arch. On x86_64, it uses the amd64 image.
+
